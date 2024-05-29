@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 import dj_database_url
 
@@ -31,7 +32,11 @@ SECRET_KEY = 'django-insecure-t6&w_7mxbitf5d7_ipav6*nf8#ya72d*p(+)^i1y56gu--&49h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Configuraciones de seguridad
 CSRF_COOKIE_SECURE = True
